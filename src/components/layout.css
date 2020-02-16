@@ -49,9 +49,9 @@ html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   --black: #141516;
-  --pink: #ffc0d7d0;
+  --pink: #ffc0d750;
   --lilac: #cac0ffd0;
-  --mint: #c3ffc0d0;
+  --mint: #c3ffc0a0;
   --peach: #ffdec0d0;
   --sky: #c0e4ffd0;
   --navy: #17518a;
@@ -63,6 +63,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
   font-family: 'Lora', serif;
+  font-size: 22px;
+  line-height: 1.6;
 }
 
 article,
@@ -97,12 +99,15 @@ template {
   display: none;
 }
 a {
+  text-decoration: none;
   background-color: transparent;
   color: var(--navy);
   -webkit-text-decoration-skip: objects;
 }
 a:active,
 a:hover {
+  text-decoration: underline;
+  cursor: pointer;
   outline-width: 0;
 }
 abbr[title] {
@@ -119,7 +124,7 @@ dfn {
   font-style: italic;
 }
 h1 {
-  font-weight: 400;
+  font-weight: bold;
   font-size: 2em;
   margin: 0.67em 0;
 }
@@ -294,7 +299,7 @@ h1 {
   line-height: 1.1;
 }
 h2 {
-  font-weight: 400;
+  font-weight: bold;
   margin-left: 0;
   margin-right: 0;
   margin-top: 0;
@@ -309,7 +314,7 @@ h2 {
   line-height: 1.1;
 }
 h3 {
-  font-weight: 400;
+  font-weight: bold;
   margin-left: 0;
   margin-right: 0;
   margin-top: 0;
@@ -333,7 +338,7 @@ h4 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-weight: 400;
+  font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 1rem;
   line-height: 1.1;
@@ -348,7 +353,7 @@ h5 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-weight: 400;
+  font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 0.85028rem;
   line-height: 1.1;
@@ -363,7 +368,7 @@ h6 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-weight: 400;
+  font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 0.78405rem;
   line-height: 1.1;
@@ -449,7 +454,6 @@ pre {
   margin-bottom: 1.45rem;
   font-size: 0.85rem;
   line-height: 1.42;
-  background: hsla(0, 0%, 0%, 0.04);
   border-radius: 3px;
   overflow: auto;
   word-wrap: normal;

@@ -14,6 +14,12 @@ const colors = [
   Color.sky,
 ];
 
-export default function randomColor(): Color {
-  return colors[Math.floor(Math.random() * 5)];
-}
+export default (function (): () => Color {
+  let available = [...colors];
+
+  return function randomColor(): Color {
+    const chosen = available[Math.floor(Math.random() * available.length)];
+    available = colors.filter(color => color !== chosen);
+    return chosen;
+  };
+}());

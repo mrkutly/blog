@@ -1,6 +1,7 @@
 declare module 'custom-types' {
   export interface Post {
     id: string;
+    html: string;
     fields: {
       slug: string;
     };
@@ -22,7 +23,9 @@ declare module 'custom-types' {
     children: undefined;
     pageResources: object;
     data: object;
-    pageContext: object;
+    pageContext: {
+      post: Post;
+    };
   }
 
   export interface PostNode {

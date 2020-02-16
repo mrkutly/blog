@@ -1,20 +1,20 @@
-const path = require(`path`)
-const { createFilePath } = require(`gatsby-source-filesystem`)
+const path = require(`path`);
+const { createFilePath } = require(`gatsby-source-filesystem`);
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
-	const { createNodeField } = actions
+	const { createNodeField } = actions;
 	if (node.internal.type === `MarkdownRemark`) {
 		const slug = createFilePath({ node, getNode, basePath: `pages` });
 		createNodeField({
 			node,
 			name: `slug`,
 			value: slug,
-		})
+		});
 	}
-}
+};
 
 exports.createPages = ({ graphql, actions }) => {
-	const { createPage } = actions
+	const { createPage } = actions;
 
 	return graphql(`
     {
@@ -22,6 +22,9 @@ exports.createPages = ({ graphql, actions }) => {
         edges {
           node {
 						html
+						frontmatter {
+							title
+						}
             fields {
               slug
             }
@@ -31,15 +34,15 @@ exports.createPages = ({ graphql, actions }) => {
     }
   `).then(result => {
 		const blogPosts = result.data.allMarkdownRemark.edges;
-			
+
 		// Create blog post pages and define pagination rules
-		const postsPerPage = 6
-		const numPages = Math.ceil(blogPosts.length / postsPerPage)
+		const postsPerPage = 6;
+		const numPages = Math.ceil(blogPosts.length / postsPerPage);
 
 		blogPosts.forEach(({ node }, index) => {
 			const next =
-				index === blogPosts.length - 1 ? null : blogPosts[index + 1].node
-			const previous = index === 0 ? null : blogPosts[index - 1].node
+				index === blogPosts.length - 1 ? null : blogPosts[index + 1].node;
+			const previous = index === 0 ? null : blogPosts[index - 1].node;
 
 			createPage({
 				path: node.fields.slug,
@@ -48,7 +51,7 @@ exports.createPages = ({ graphql, actions }) => {
 					// Data passed to context is available
 					// in page queries as GraphQL variables.
 					slug: node.fields.slug,
-					html: node.html,
+					post: node,
 					// give each page it's context in the paginitation
 					previous,
 					next,
@@ -56,7 +59,7 @@ exports.createPages = ({ graphql, actions }) => {
 					numPages,
 					postsPerPage,
 				},
-			})
-		})
-	})
-}
+			});
+		});
+	});
+};

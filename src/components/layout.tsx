@@ -21,11 +21,11 @@ const Layout: React.FC = ({ children }) => {
     const css = `
       body:after {
         content: "";
+        height: 100vh;    
         clip-path: polygon(0 79%, 100% 100%, 100% 0);
-        height: 100vh;
         background: ${randomColor()};
         display: block;
-        position: absolute;
+        position: fixed;
         top: 0;
         right: 0;
         width: 100vw;
@@ -38,7 +38,7 @@ const Layout: React.FC = ({ children }) => {
         height: 100vh;
         background: ${randomColor()};
         display: block;
-        position: absolute;
+        position: fixed;
         top: 0;
         right: 0;
         width: 100vw;
@@ -61,7 +61,7 @@ const Layout: React.FC = ({ children }) => {
           padding: `0 1.0875rem 1.45rem`,
         }}
       >
-        <main style={{ minHeight: '75vh' }}>{children}</main>
+        <main>{children}</main>
       </div>
     </>
   );

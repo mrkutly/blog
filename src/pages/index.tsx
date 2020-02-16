@@ -1,5 +1,5 @@
 import React from "react";
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
@@ -8,13 +8,11 @@ import { IndexPageProps } from "custom-types";
 
 export const BlogPostsQuery = graphql`
   query {
-    posts: allMarkdownRemark {
+    posts: allMarkdownRemark(limit: 10, sort: {fields: frontmatter___date, order: DESC}) {
       edges {
         node {
           frontmatter {
-            author
             blurb
-            date
             title
           }
           fields {
@@ -32,9 +30,27 @@ const IndexPage: React.FC<IndexPageProps> = (props) => {
   return (
     <Layout>
       <SEO title="home" />
-      {posts.edges.map(({ node }) => (
-        <Postcard post={node} />
-      ))}
+      <section id="intro" style={{ margin: '20vh 0', height: '70vh' }}>
+        <h1>hello</h1>
+        <p>My name is Mark. I'm a web developer and drummer. I live on Lenape Land (known as Brooklyn, NY). I write about web development from time to time. Thanks for checking out my blog. Scroll down to see some posts.</p>
+      </section>
+      <section style={{ minHeight: '80vh' }}>
+        <h1>recent posts</h1>
+        <hr />
+        <ul>
+          {posts.edges.map(({ node }, idx) => {
+            if (idx !== posts.edges.length - 1) {
+              return (
+                <>
+                  <Postcard post={node} key={node.fields.slug} />
+                  <hr />
+                </>
+              );
+            }
+            return (<Postcard post={node} key={node.fields.slug} />);
+          })}
+        </ul>
+      </section>
     </Layout>
   );
 };

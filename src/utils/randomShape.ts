@@ -18,10 +18,6 @@ function underFifty(): number {
   return Math.floor(Math.random() * 51);
 }
 
-function aroundFifty(): number {
-  return Math.floor(Math.random() * 31) + 35;
-}
-
 
 export default function randomShape(): string {
   return `polygon(${overFifty()}% ${overFifty()}%, ${underFifty()}% ${overFifty()}%, ${randomPositive()}% ${randomNumber()}%, ${randomPositive()}% ${randomNegative()}%)`;

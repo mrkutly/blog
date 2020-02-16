@@ -7,8 +7,14 @@ interface PostcardProps {
 }
 
 const Postcard: React.FC<PostcardProps> = ({ post }) => {
-
-  return <Link to={post.fields.slug}><h2>{post.frontmatter.title}</h2></Link>;
+  return (
+    <Link to={post.fields.slug}>
+      <li style={{ color: 'var(--black)' }}>
+        <h3>{post.frontmatter.title}</h3>
+        <p>{post.frontmatter.blurb}</p>
+      </li>
+    </Link>
+  );
 };
 
 export default Postcard;
