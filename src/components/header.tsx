@@ -9,7 +9,6 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ siteTitle }) => (
   <header
     style={{
-      background: `rebeccapurple`,
       marginBottom: `1.45rem`,
     }}
   >
@@ -24,8 +23,14 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => (
         <Link
           to="/"
           style={{
-            color: `white`,
             textDecoration: `none`,
+            color: 'var(--black)',
+            fontFamily: 'Poiret One',
+            display: 'inline-block',
+            fontSize: '2.6rem',
+            borderTop: '1px solid var(--black)',
+            borderRight: '1px solid var(--black)',
+            padding: '5px 5px 5px 0',
           }}
         >
           {siteTitle}

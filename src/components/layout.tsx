@@ -1,16 +1,10 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
 
 import Header from "./header";
 import "./layout.css";
+import { randomColor, randomShape } from "../utils";
 
 const Layout: React.FC = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -23,6 +17,40 @@ const Layout: React.FC = ({ children }) => {
     }
   `);
 
+  useEffect(() => {
+    const css = `
+      body:after {
+        content: "";
+        clip-path: polygon(0 79%, 100% 100%, 100% 0);
+        height: 100vh;
+        background: ${randomColor()};
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100vw;
+        z-index: -1;
+      }
+
+      body:before {
+        content: "";
+        clip-path: ${randomShape()};
+        height: 100vh;
+        background: ${randomColor()};
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100vw;
+        z-index: -1;
+      }
+    `;
+
+    const style = document.createElement('style');
+    style.innerHTML = css;
+    document.head.append(style);
+  }, []);
+
   return (
     <>
       <Header siteTitle={data.site.siteMetadata.title} />
@@ -33,12 +61,7 @@ const Layout: React.FC = ({ children }) => {
           padding: `0 1.0875rem 1.45rem`,
         }}
       >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
+        <main style={{ minHeight: '75vh' }}>{children}</main>
       </div>
     </>
   );

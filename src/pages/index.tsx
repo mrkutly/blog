@@ -1,21 +1,42 @@
 import React from "react";
-import { Link } from "gatsby";
+import { graphql } from "gatsby";
 
 import Layout from "../components/layout";
-import Image from "../components/image";
 import SEO from "../components/seo";
+import Postcard from "../components/Postcard";
+import { IndexPageProps } from "custom-types";
 
-const IndexPage: React.FC = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-);
+export const BlogPostsQuery = graphql`
+  query {
+    posts: allMarkdownRemark {
+      edges {
+        node {
+          frontmatter {
+            author
+            blurb
+            date
+            title
+          }
+          fields {
+            slug
+          }
+        }
+      }
+    }
+  }
+`;
+
+const IndexPage: React.FC<IndexPageProps> = (props) => {
+  const { posts } = props.data;
+
+  return (
+    <Layout>
+      <SEO title="home" />
+      {posts.edges.map(({ node }) => (
+        <Postcard post={node} />
+      ))}
+    </Layout>
+  );
+};
 
 export default IndexPage;
