@@ -23,6 +23,7 @@ const Layout: React.FC = ({ children }) => {
         content: "";
         height: 100vh;    
         clip-path: polygon(0 79%, 100% 100%, 100% 0);
+        -webkit-clip-path: polygon(0 79%, 100% 100%, 100% 0);
         background: ${randomColor()};
         display: block;
         position: fixed;
@@ -34,7 +35,7 @@ const Layout: React.FC = ({ children }) => {
 
       body:before {
         content: "";
-        clip-path: ${randomShape()};
+        -webkit-clip-path: ${randomShape()};
         height: 100vh;
         background: ${randomColor()};
         display: block;
