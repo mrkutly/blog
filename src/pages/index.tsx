@@ -4,7 +4,7 @@ import { graphql, Link } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import Postcard from "../components/Postcard";
-import { IndexPageProps } from "custom-types";
+import { IndexPageProps } from "../types";
 
 export const BlogPostsQuery = graphql`
   query {

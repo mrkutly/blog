@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "gatsby";
-import { Post } from 'custom-types';
+import { Post } from '../types';
 
 interface PostcardProps {
   post: Post;

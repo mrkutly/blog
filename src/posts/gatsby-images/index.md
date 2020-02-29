@@ -446,6 +446,8 @@ export default props => {
 };
 ```
 
-## That's All 
+---
 
-Thank you for reading. Hope this helped somehow :)
+## Thanks :)
+
+That's all. Thanks for reading! Migwech n'nikanek <3

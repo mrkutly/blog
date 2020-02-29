@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
 
@@ -86,10 +85,6 @@ const SEO: React.FC<SEOProps> = ({ description, lang, meta, title }) => {
           name: `twitter:description`,
           content: metaDescription,
         },
-        {
-          name: 'keywords',
-          content: 'javascript, react, gatsby, next.js, typescript, node.js, developer, web development, frontend, backend, graphql'
-        }
       ]}
     />
   );
