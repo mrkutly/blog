@@ -1,5 +1,5 @@
 ---
-title: "Setting Up Authenticated Sessions with Svelte and Sapper (or, Sapper can have little an auth, as a treat)."
+title: "Setting Up Authenticated Sessions with Svelte and Sapper (Sapper can have little an auth, as a treat)."
 date: "2020/02/29"
 author: "Mark Sauer-Utley"
 blurb: "How to setup a session store and use JWT's to keep track of user authentication in my new favorite framework."
@@ -26,7 +26,7 @@ framework. So, I wanted to write about it because there weren't many good exampl
 
 ## The Setup 
 
-So I have a REST API that uses JWT for user authentication. For this example, we'll say that 
+I have a REST API that uses JWT for user authentication. For this example, we'll say that 
 a user can login and save and view details about their favorite dogs. 
 
 If this were a client-rendered app, I would probably have a flow like this: 
@@ -96,8 +96,8 @@ This way, when a user tries to go to see their favorite dogs, the server can sen
 the `authToken` to the REST API to get all the dog details for that logged-in user. Then, it can 
 generate the HTML, CSS, and JS bundle necessary to render those details, and ship them to the client.
 
-If the token is only stored in the client's app-stae, then the client would need to make that REST 
-API request to get the dog details, which means the *client* will then be in charge of rendering the 
+If the token is only stored in the client's app-state, then the **client** would need to make that REST 
+API request to get the dog details, which means the **client** will then be in charge of rendering the 
 dog details page. And just like that, you have lost all those nice benefits that SSR gives you (routing, 
 code-splitting, easy-prefetching, etc.).
 
@@ -145,10 +145,10 @@ If you wanna follow along with a fresh project, run this in your terminal:
 
 A session store is essentially a cache. It's just a special kind of cache that is going to map cookies to records 
 and then use those records to store data about the user. Because of this, there are a couple of cache implemetations
-you can use. I normally like using Redis the best, but I'm just going to use a filesystem cache here 
+you can use. I normally like using Redis, but I'm just going to use a filesystem cache here 
 because it has almost zero setup involed.
 
-So we need to install three packages into our Sapper project
+We need to install three packages into our Sapper project
 
   1. [body-parser](https://www.npmjs.com/package/body-parser) - we're just going to use this for parsing json between requests. I'm using the Sapper 
   template that is setup with polka (not express) so I am going to need this.
@@ -157,11 +157,12 @@ So we need to install three packages into our Sapper project
   sessions to the requests for the rest of the routes to reference. (It's okay, we can use express middlewares with polka!)
   3. [session-file-store](https://www.npmjs.com/package/session-file-store) - this is going to be the thing that handles storing our session data and removing expired sessions.
 
-Cool okay so let's run:
+Let's run this in our terminal:
 
 `$ npm i session-file-store express-session body-parser`
 
-Awesome. Let's implement those. In our project we, have a `src/server.js` file that looks like this:
+Now that they are installed, let's implement them. 
+In our project we, have a `src/server.js` file that looks like this:
 
 ```javascript 
 // in src/server.js
@@ -306,6 +307,8 @@ Awesome! Let's refactor that login component from earlier. This time, instead of
 login route, it will hit our Sapper login server-route.
 
 ```html
+<!-- in src/routes/login.svelte -->
+
 <script>
   let password = "";
   let email = "";
@@ -346,9 +349,9 @@ which just spits out HTML. We need to implement the server route that sends the 
 First though, we should install something like `isomorphic-unfetch` or `node-fetch` so we can make 
 promise-based http requests. Remember, **this code is executed on our server where there is no fetch API**.
 
-I'll use `node-fetch`.
+Let's install `node-fetch` by running `$ npm i node-fetch` in my terminal.
 
-Install: `$ npm i node-fetch`
+Then, we'll open up `src/routes/login.js` and start implementing our login route.
 
 ```javascript
 // in src/routes/login.js
@@ -383,7 +386,7 @@ export async function post(req, res) {
 }
 ```
 
-So here, we are getting token from the server, attaching it to the session, and sending it back 
+In this function, we are getting token from the server, attaching it to the session, and sending it back 
 to the client. If there is an error, we will just send the error message back to the client. 
 
 ---
@@ -396,6 +399,8 @@ update it with the token that we got back from the server. We'll also redirect t
 page once they are logged in.
 
 ```html 
+<!-- in src/routes/login.svelte -->
+
 <script>
   import { goto, stores } from "@sapper/app";
   const { session } = stores();
@@ -429,8 +434,8 @@ page once they are logged in.
 ...
 ```
 
-Now, our client and server session data will be in sync and we are ready to use those tokens 
-to fetch the doggie details!
+Our client and server session data will now be in sync and we are ready to use those tokens 
+to fetch the doggie details.
 
 ---
 
@@ -449,6 +454,8 @@ Let's throw a `preload` function in our `src/routes/doggie-details.svelte` file 
 session to see what we're working with.
 
 ```html 
+<!-- in src/routes/doggie-details.svelte -->
+
 <script context="module">
   export function preload(page, session) {
     console.log(session);
@@ -458,7 +465,7 @@ session to see what we're working with.
 <h1>welcome to the doggie details page</h1>
 ```
 
-Wonder what got popped into the console...
+Wonder what got popped into the console... Let's check in our terminal.
 
 ```javascript 
 {
@@ -472,11 +479,15 @@ that within the `preload` function, we have access to a method called `this.fetc
 this bit of code is getting run on the server, we don't have to import `node-fetch` to make 
 promise-based HTTP requests.
 
-So let's take the token out of the session. If there is no token, we'll redirect the user to the login.
-If we get an error from the server, we'll send the user to an error page. And if there are doggies and 
-the user was authenticated and everything worked fine, we'll pass the doggies to our component for rendering.
+Our `preload` function is going to: 
+  1. Get the token out of the session.
+  2. If there is no token, we'll redirect the user to the login.
+  3. If we get an error from the server, we'll send the user to an error page. 
+  4. If there are doggies and the user was authenticated and everything worked fine, we'll pass the doggies to our component for rendering.
 
 ```html 
+<!-- in src/routes/doggie-details.svelte -->
+
 <script context="module">
   export async function preload(page, session) {
     const { token } = session;
@@ -507,14 +518,16 @@ the user was authenticated and everything worked fine, we'll pass the doggies to
 <h1>welcome to the doggie details page</h1>
 ```
 
-*Note that the return value of the preload function when everything works is an object containing 
-all the props that will be passed to the component.*
+> **_Note that the return value of the preload function when everything works is an object containing 
+> all the props that will be passed to the component._**
 
 Now, we can add a little client side script to declare that our component is going to get a prop 
 called `doggies`. Once we have done that, we can render them out in our component. 
 Nothing special going on here, this is just normal Svelte props :)
 
 ```html 
+<!-- in src/routes/doggie-details.svelte -->
+
 <script context="module">
   export async function preload(page, session) {
     ...
