@@ -65,7 +65,7 @@ const SEO: React.FC<SEOProps> = ({ description, lang, meta, title, path }) => {
     canonicalUrl += path;
   }
 
-  const logoSrc = siteLogo.childImageSharp.fixed.src;
+  const logoSrc = site.siteMetadata.url + siteLogo.childImageSharp.fixed.src;
   const metaDescription = description || site.siteMetadata.description;
 
   return (
