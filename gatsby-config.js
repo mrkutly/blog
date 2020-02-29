@@ -3,7 +3,8 @@ module.exports = {
     title: `Mark Sauer-Utley`,
     description: `Blog of NYC-based dev Mark Sauer-Utley`,
     author: `Mark Sauer-Utley`,
-    url: `https://blog.marksauerutley.com`
+    url: `https://blog.marksauerutley.com`,
+    image: `/images/logo.png`
   },
   plugins: [
     `gatsby-plugin-typescript`,
@@ -98,7 +99,7 @@ module.exports = {
         background_color: `#063399`,
         theme_color: `#063399`,
         display: `minimal-ui`,
-        icon: `src/images/favicon.png`, // This path is relative to the root of the site.
+        icon: `src/static/images/logo.png`, // This path is relative to the root of the site.
       },
     },
     `gatsby-plugin-offline`,

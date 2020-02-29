@@ -21,6 +21,7 @@ interface SiteMetadata {
   description: string;
   author: string;
   url: string;
+  image: string;
 }
 
 type SiteQueryResult = {
@@ -39,6 +40,7 @@ const SEO: React.FC<SEOProps> = ({ description, lang, meta, title, path }) => {
             description
             author
             url
+            image
           }
         }
       }
@@ -70,6 +72,10 @@ const SEO: React.FC<SEOProps> = ({ description, lang, meta, title, path }) => {
           content: title,
         },
         {
+          property: `og:image`,
+          content: site.siteMetadata.image,
+        },
+        {
           property: `og:url`,
           content: canonicalUrl,
         },
@@ -80,6 +86,10 @@ const SEO: React.FC<SEOProps> = ({ description, lang, meta, title, path }) => {
         {
           property: `og:type`,
           content: `blog`,
+        },
+        {
+          property: `twitter:image`,
+          content: site.siteMetadata.image,
         },
         {
           name: `twitter:card`,
