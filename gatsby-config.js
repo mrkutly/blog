@@ -3,8 +3,7 @@ module.exports = {
     title: `Mark Sauer-Utley`,
     description: `Blog of NYC-based dev Mark Sauer-Utley`,
     author: `Mark Sauer-Utley`,
-    url: `https://blog.marksauerutley.com`,
-    image: `/images/logo.png`
+    url: `https://blog.marksauerutley.com`
   },
   plugins: [
     `gatsby-plugin-typescript`,
@@ -14,6 +13,13 @@ module.exports = {
       options: {
         name: `posts`,
         path: `${__dirname}/src/posts`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `staticImages`,
+        path: `${__dirname}/src/static/images`,
       },
     },
     `gatsby-transformer-sharp`,

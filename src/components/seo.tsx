@@ -21,17 +21,23 @@ interface SiteMetadata {
   description: string;
   author: string;
   url: string;
-  image: string;
 }
 
 type SiteQueryResult = {
   site: {
     siteMetadata: SiteMetadata;
   };
+  siteLogo: {
+    childImageSharp: {
+      fixed: {
+        src: string;
+      };
+    };
+  };
 };
 
 const SEO: React.FC<SEOProps> = ({ description, lang, meta, title, path }) => {
-  const { site }: SiteQueryResult = useStaticQuery(
+  const { site, siteLogo }: SiteQueryResult = useStaticQuery(
     graphql`
       query {
         site {
@@ -40,18 +46,26 @@ const SEO: React.FC<SEOProps> = ({ description, lang, meta, title, path }) => {
             description
             author
             url
-            image
+          }
+        }
+        siteLogo: file(relativePath: {eq: "logo.png"}) {
+          childImageSharp {
+            fixed(width: 300) {
+              src
+            }
           }
         }
       }
     `
   );
 
+
   let canonicalUrl = site.siteMetadata.url;
   if (path) {
     canonicalUrl += path;
   }
-  const imagePath = site.siteMetadata.url + site.siteMetadata.image;
+
+  const logoSrc = siteLogo.childImageSharp.fixed.src;
   const metaDescription = description || site.siteMetadata.description;
 
   return (
@@ -65,7 +79,7 @@ const SEO: React.FC<SEOProps> = ({ description, lang, meta, title, path }) => {
         ...meta,
         {
           name: `image`,
-          content: imagePath,
+          content: logoSrc,
         },
         {
           name: `description`,
@@ -79,7 +93,7 @@ const SEO: React.FC<SEOProps> = ({ description, lang, meta, title, path }) => {
         },
         {
           property: `og:image`,
-          content: imagePath,
+          content: logoSrc,
         },
         {
           property: `og:url`,
@@ -96,7 +110,7 @@ const SEO: React.FC<SEOProps> = ({ description, lang, meta, title, path }) => {
         // twitter stuff
         {
           name: `twitter:image`,
-          content: imagePath,
+          content: logoSrc,
         },
         {
           name: `twitter:card`,
