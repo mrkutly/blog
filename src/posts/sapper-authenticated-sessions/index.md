@@ -1,5 +1,5 @@
 ---
-title: "Setting Up Authenticated Sessions with Svelte and Sapper (Sapper can have little an auth, as a treat)."
+title: "Setting Up Authenticated Sessions with Svelte and Sapper."
 date: "2020/02/29"
 author: "Mark Sauer-Utley"
 blurb: "How to setup a session store and use JWT's to keep track of user authentication in my new favorite framework."
