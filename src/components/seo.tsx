@@ -64,9 +64,15 @@ const SEO: React.FC<SEOProps> = ({ description, lang, meta, title, path }) => {
       meta={[
         ...meta,
         {
+          name: `image`,
+          content: site.siteMetadata.image,
+        },
+        {
           name: `description`,
           content: metaDescription,
         },
+
+        // facebook stuff
         {
           property: `og:title`,
           content: title,
@@ -87,8 +93,9 @@ const SEO: React.FC<SEOProps> = ({ description, lang, meta, title, path }) => {
           property: `og:type`,
           content: `blog`,
         },
+        // twitter stuff
         {
-          property: `twitter:image`,
+          name: `twitter:image`,
           content: site.siteMetadata.image,
         },
         {
