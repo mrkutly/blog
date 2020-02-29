@@ -51,7 +51,7 @@ const SEO: React.FC<SEOProps> = ({ description, lang, meta, title, path }) => {
   if (path) {
     canonicalUrl += path;
   }
-
+  const imagePath = site.siteMetadata.url + site.siteMetadata.image;
   const metaDescription = description || site.siteMetadata.description;
 
   return (
@@ -65,7 +65,7 @@ const SEO: React.FC<SEOProps> = ({ description, lang, meta, title, path }) => {
         ...meta,
         {
           name: `image`,
-          content: site.siteMetadata.image,
+          content: imagePath,
         },
         {
           name: `description`,
@@ -79,7 +79,7 @@ const SEO: React.FC<SEOProps> = ({ description, lang, meta, title, path }) => {
         },
         {
           property: `og:image`,
-          content: site.siteMetadata.image,
+          content: imagePath,
         },
         {
           property: `og:url`,
@@ -96,7 +96,7 @@ const SEO: React.FC<SEOProps> = ({ description, lang, meta, title, path }) => {
         // twitter stuff
         {
           name: `twitter:image`,
-          content: site.siteMetadata.image,
+          content: imagePath,
         },
         {
           name: `twitter:card`,
