@@ -13,12 +13,14 @@ interface SEOProps {
   lang?: string;
   meta?: Meta[];
   title: string;
+  path?: string;
 }
 
 interface SiteMetadata {
   title: string;
   description: string;
   author: string;
+  url: string;
 }
 
 type SiteQueryResult = {
@@ -27,7 +29,7 @@ type SiteQueryResult = {
   };
 };
 
-const SEO: React.FC<SEOProps> = ({ description, lang, meta, title }) => {
+const SEO: React.FC<SEOProps> = ({ description, lang, meta, title, path }) => {
   const { site }: SiteQueryResult = useStaticQuery(
     graphql`
       query {
@@ -36,11 +38,17 @@ const SEO: React.FC<SEOProps> = ({ description, lang, meta, title }) => {
             title
             description
             author
+            url
           }
         }
       }
     `
   );
+
+  let canonicalUrl = site.siteMetadata.url;
+  if (path) {
+    canonicalUrl += path;
+  }
 
   const metaDescription = description || site.siteMetadata.description;
 
@@ -62,16 +70,24 @@ const SEO: React.FC<SEOProps> = ({ description, lang, meta, title }) => {
           content: title,
         },
         {
+          property: `og:url`,
+          content: canonicalUrl,
+        },
+        {
           property: `og:description`,
           content: metaDescription,
         },
         {
           property: `og:type`,
-          content: `website`,
+          content: `blog`,
         },
         {
           name: `twitter:card`,
           content: `summary`,
+        },
+        {
+          name: `twitter:url`,
+          content: canonicalUrl,
         },
         {
           name: `twitter:creator`,
@@ -86,7 +102,9 @@ const SEO: React.FC<SEOProps> = ({ description, lang, meta, title }) => {
           content: metaDescription,
         },
       ]}
-    />
+    >
+      <link rel="canonical" href={canonicalUrl} />
+    </Helmet>
   );
 };
 
@@ -96,4 +114,4 @@ SEO.defaultProps = {
   description: ``,
 };
 
-export default SEO;
+export default SEO;;

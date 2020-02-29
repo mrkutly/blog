@@ -2,7 +2,8 @@ module.exports = {
   siteMetadata: {
     title: `Mark Sauer-Utley`,
     description: `Blog of NYC-based dev Mark Sauer-Utley`,
-    author: `@mrkutly`,
+    author: `Mark Sauer-Utley`,
+    url: `https://blog.marksauerutley.com`
   },
   plugins: [
     `gatsby-plugin-typescript`,
