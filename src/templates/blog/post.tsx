@@ -7,6 +7,7 @@ import { PageProps } from '../../types';
 const Post: React.FC<PageProps> = (props) => {
   const { post, next, previous } = props.pageContext;
   const { title, blurb } = post.frontmatter;
+
   return (
     <Layout>
       <SEO title={title} description={blurb} />

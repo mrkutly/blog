@@ -24,6 +24,7 @@ exports.createPages = ({ graphql, actions }) => {
 						html
 						frontmatter {
 							title
+							blurb
 						}
             fields {
               slug
