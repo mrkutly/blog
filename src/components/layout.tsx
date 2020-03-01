@@ -4,8 +4,6 @@ import Header from "./header";
 import "./layout.css";
 import { randomColor, randomShape } from "../utils";
 
-
-
 const Layout: React.FC = ({ children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {

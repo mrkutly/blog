@@ -431,14 +431,14 @@ export default props => {
           const width = window && window.innerWidth;
 
           if (width < 701) {
-            return setAlt(bjork.fields.caption);
+            return setAlt(bjork.fields.alt);
           }
 
           if (width < 1001) {
-            return setAlt(skogafoss.fields.caption);
+            return setAlt(skogafoss.fields.alt);
           }
 
-          setAlt(reynisfjara.fields.caption);
+          setAlt(reynisfjara.fields.alt);
         }}
       />
     </Layout>
