@@ -40,12 +40,7 @@ const IndexPage: React.FC<IndexPageProps> = (props) => {
         <ul>
           {posts.edges.map(({ node }, idx) => {
             if (idx !== posts.edges.length - 1) {
-              return (
-                <>
-                  <Postcard post={node} key={node.fields.slug} />
-                  <hr />
-                </>
-              );
+              return <Postcard post={node} key={node.fields.slug} withBreak />;
             }
             return (<Postcard post={node} key={node.fields.slug} />);
           })}

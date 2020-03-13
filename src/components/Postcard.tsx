@@ -4,16 +4,18 @@ import { Post } from '../types';
 
 interface PostcardProps {
   post: Post;
+  withBreak?: boolean;
 }
 
-const Postcard: React.FC<PostcardProps> = ({ post }) => {
+const Postcard: React.FC<PostcardProps> = ({ post, withBreak }) => {
   return (
-    <Link to={post.fields.slug}>
-      <li style={{ color: 'var(--black)' }}>
+    <li>
+      <Link to={post.fields.slug} style={{ color: 'var(--black)' }}>
         <h3>{post.frontmatter.title}</h3>
         <p>{post.frontmatter.blurb}</p>
-      </li>
-    </Link>
+      </Link>
+      {withBreak && <hr style={{ margin: '20px 0' }} />}
+    </li>
   );
 };
 
