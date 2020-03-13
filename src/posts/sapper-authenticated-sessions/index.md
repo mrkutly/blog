@@ -137,7 +137,7 @@ For this post, I'm going to be referencing a project that was bootstrapped accor
 
 If you wanna follow along with a fresh project, run this in your terminal:
 
-```zsh
+```bash
 $ npx degit "sveltejs/sapper-template#rollup" my-app
 ```
 
@@ -161,7 +161,7 @@ We need to install three packages into our Sapper project
 
 Let's run this in our terminal:
 
-```zsh
+```bash
 $ npm i session-file-store express-session body-parser
 ```
 
