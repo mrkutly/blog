@@ -33,6 +33,7 @@ const Layout: React.FC = ({ children }) => {
 
       body:before {
         content: "";
+        clip-path: ${randomShape()};
         -webkit-clip-path: ${randomShape()};
         height: 100vh;
         background: ${randomColor()};
@@ -45,7 +46,7 @@ const Layout: React.FC = ({ children }) => {
       }
     `;
 
-    const style = document.createElement('style');
+    const style = document.createElement("style");
     style.innerHTML = css;
     document.head.append(style);
   }, []);
