@@ -229,7 +229,7 @@ a function that takes in an action and calls next with the action.
 But let's not describe it like that. Let's just say this is the curried form of this function:
 
 ```javascript
-const myMiddleware = (action, next, store) => {
+const myMiddleware = (store, next, action) => {
   return next(action);
 };
 ```
