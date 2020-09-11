@@ -57,12 +57,13 @@ const fetchDog = () => async dispatch => {
 The reducer would probably look something like this:
 
 ```javascript
-const dogState = {
+// @redux/reducers/dog.js
+export const initialDogState = {
   data: null,
   status: "idle",
 };
 
-function dogReducer(state = dogState, action) {
+function dogReducer(state = initialDogState, action) {
   switch (action.type) {
     case "DOG_FETCH_STARTED":
       return {
@@ -88,6 +89,8 @@ function dogReducer(state = dogState, action) {
       return state;
   }
 }
+
+export default dogReducer;
 ```
 
 ---
@@ -308,6 +311,24 @@ const handleErrors = ({ dispatch, getState }) => next => action => {
 
   return next(action);
 };
+```
+
+To get this plugged in, let's apply this middleware wherever we create our store:
+
+```javascript
+// @redux/store.js
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+import handleErrors from "@redux/middleware/handleErrors";
+import dogReducer, { initialDogState } from "@redux/reducers/dog";
+
+const store = createStore(
+  dogReducer,
+  initialDogState,
+  applyMiddleware(handleErrors, thunk)
+);
+
+export default store;
 ```
 
 So now, anytime we dispatch an action with the `ASYNC` type, its `handler` gets called and its errors our caught and cleaned up for us.
