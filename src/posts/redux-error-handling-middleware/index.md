@@ -361,4 +361,4 @@ middleware.
 ## That's it
 
 This might be an awful way of doing this. I am not smart enough to know. But, I'm doing it and it is working for
-me so far. So I hope you enjoyed reading this bbs. Bama mine wabmenem <3
+me so far. So I hope you enjoyed reading this bbs. Bama mine gwabmenem <3
