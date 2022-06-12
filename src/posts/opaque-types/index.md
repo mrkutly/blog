@@ -175,7 +175,7 @@ Sometimes you need to get an opaque type via validation. This is where type guar
 ```typescript
 // a very pared-down, contrived example
 declare const EmailS: unique symbol
-type Email = Opaque<string, EmailS>
+type Email = Opaque<string, typeof EmailS>
 
 const isEmail = (x: string): x is Email => /emailregex/.test(x)
 
