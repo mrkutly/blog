@@ -201,7 +201,6 @@ For example, you might be validating this data in the form and showing users err
 
 Now, you're doing unnecessary validation that could have just been enforced by the compiler using a smart constructor. You also now have **two sources of truth** for the validation, which can easily lead to bugs as new requirements are added to this feature. For example, Josh hits you up and says dog names now have to be at least 3 characters. Now we have to update the validation in two places, maybe more! And we can't actually be confident we caught it all without manual testing. If we were using smart constructors, we could be **way more confident** that our changes will be safe.
 
-## That's all! Further reading here:
+## That's all!
 
-*   [Smart constructors + fp-ts = 😍](https://dev.to/gcanti/functional-design-smart-constructors-14nb)    
-*   [Validation with smart constructors](https://haskell-at-work.com/episodes/2018-02-26-validation-with-smart-constructors.html) (a haskell blog, but a good read!)
+Thanks for reading!
