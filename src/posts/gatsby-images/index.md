@@ -2,7 +2,7 @@
 title: "Accessible Art Direction with Gatbsy Images"
 date: "2019/09/12"
 author: "Mark Sauer-Utley"
-blurb: "How to be sure that your art-directed images are accessible to screen readers"
+blurb: "How to be sure that your art-directed images are accessible to screen readers."
 ---
 
 ![Reynisfjara black sand beach](/images/reynisfjara.jpg)
