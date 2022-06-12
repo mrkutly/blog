@@ -52,8 +52,8 @@ Let's see how this could be much nicer with opaque types!
 ### Using opaque types
 
 ```typescript
-// this Opaque helper can be used to create opaque types
-// don't worry about its implementation for now.
+// This Opaque helper can be used to create opaque types.
+// Don't worry about its implementation for now.
 // Just know that we can use `unique symbol` to ensure
 // that no two opaque types can be assigned to each other.
 declare class OpaqueTag<S extends symbol> {
