@@ -125,8 +125,8 @@ const pathForFavorite = (favorite: Favorite) => {
     case 'Photo':
       return generatePath(PHOTO_PATH, {
         id: favorite.favoritable_id,
-
       })
+
     case 'Group':
       return generatePath(GROUP_PATH, {
         location: favorite.favoritable_id,
