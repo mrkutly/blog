@@ -150,7 +150,7 @@ const getAgeInAnimalYears = (animal: Animal) => {
 ```
 
 ## Why do this?
-s
+
 The main benefit of this approach comes when it is time to refactor. If we use `never`​ to our advantage like this, refactoring code to support new types becomes trivial. We can also have a lot of confidence that, if our code compiles, it will likely work.
 
 If we had not used `absurd`​ in this switch statement and instead had added a `default`​ that returns `1`​ or something like that, adding `Elephant`​ would have likely resulted in bugs in our business logic, affecting customers and possibly causing them to leave our platform (who wants to use an application that can't calculate elephant's ages correctly?!?!?!).
