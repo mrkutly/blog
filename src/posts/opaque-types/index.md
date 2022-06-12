@@ -198,6 +198,8 @@ if (isEmail(unvalidatedEmail) {
 }
 ```
 
+> You can also combine this behavior with something called a **smart constructor** to get **_compile-time validation on runtime data_**. Checkout [this post](/smart-constructors) to see what that is all about
+
 ### 3 - Typecasting
 
 This is the last resort and should really only be done when you have no other choice. For example, maybe the type definitions for a library suck so you need to work around them. In this case, you get an opaque type by typecasting:
