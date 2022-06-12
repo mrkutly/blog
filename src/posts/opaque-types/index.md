@@ -210,7 +210,7 @@ interface Props {
 
 const MyComponent = ({ posts }: Props) => {
   const handleSelect = (key: PostId) => {
-    ArticleClient.getArticle(key)
+    PostClient.getPost(key)
     // do other stuff
   }
 
