@@ -25,14 +25,14 @@ Let's check out an example!
 
 ### Using transparent types
 
-We have a file in our TS frontend code called `UserClient` that is responsible for making requests to our REST API.
-Let's take a look at a couple of functions in the `UserClient`​ module - `getUser`​ and `getPost`​:​
+We have a file in our TS frontend code called `ApiClient` that is responsible for making requests to our REST API.
+Let's take a look at a couple of functions in the `ApiClient`​ module - `getUser`​ and `getPost`​:​
 
 ```typescript
 // based on real legacy code in an app I work on,
 // shortened for brevity sake and with the domains changed
 
-const UserClient = {
+const ApiClient = {
   getUser: async (id: string) => {
     return sendToApi(`/users/${id}`)
   },
@@ -78,8 +78,8 @@ interface Post {
   // ... the rest of it
 }
 
-// in UserClient module
-const UserClient = {
+// in ApiClient module
+const ApiClient = {
   getUser: async (id: UserId) => {
     return sendToApi(`/users/${id}`)
   },
@@ -102,7 +102,7 @@ Now, we have a much better idea what is happening from looking at this code. We 
 The magic really starts to happen when we want to use these functions. In our calling code, it is now impossible for us to pass the wrong string. Let's look at a usage example with the original definition of `getPost`​:
 
 ```typescript
-const UserClient = {
+const ApiClient = {
   getPost: (key: string, id: string) => {
     return sendToApi(`/users/${key}/posts/${id}`)
   }
@@ -114,7 +114,7 @@ It is so easy to call this function incorrectly (especially when dealing with co
 ```typescript
 const submit = async () => {
   // Args are in the wrong order! Compiler don't care!
-  const res = await UserClient.getPost(
+  const res = await ApiClient.getPost(
     post.id,
     user.id,
   )
@@ -134,7 +134,7 @@ With opaque types though, this will blow up:
 ```typescript
 const submit = async () => {
   // Args are in the wrong order! Compiler don't care!
-  const res = await UserClient.getPost(
+  const res = await ApiClient.getPost(
     post.id,
     // => TypeError: Type 'PostId' is not assignable to type 'UserId'
     user.id,
@@ -161,7 +161,7 @@ This is where you get the data from a network request and type the response manu
 ```typescript
 type Result<T> = Success<T> | Err
 
-const UserClient = {
+const ApiClient = {
   login: (email: string, password: string): Result<User> => {
     return sendToApi('/login')
   }
