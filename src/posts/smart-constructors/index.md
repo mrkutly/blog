@@ -11,7 +11,7 @@ blurb: "Compile time validation on runtime data."
 
 A smart constructor is a way of instantiating a type using **runtime** checks on the value. Sometimes you need guarantees about the values in your program beyond what can be accomplished with the usual compile-time type system checks. Smart constructors can be used for this!
   
-Note that in TS, smart constructors will need to be used with [Opaque Types](/opaque-types). This is because Typescript focuses on the _shape_ of types (duck typing) rather than where they came from (the way Haskell or other typed languages do).
+Note that in TS, smart constructors will need to be used with [Opaque Types](/opaque-types). This is because Typescript focuses on the _shape_ of types (duck typing) rather than where they came from (the way Haskell or other statically typed languages do).
 
 ## A Less Smart Example
 
