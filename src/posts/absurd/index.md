@@ -157,7 +157,7 @@ If we had not used `absurd`​ in this switch statement and instead had added a 
 
 ## Business-logic and compiler-driven refactoring
 
-A way to think about this is that we are using the type system to model business logic. For example, an `Application`​ can be `pending`​, `submitted`​, or `rejected`​. It can `never`​ be anything else, and we want the compiler to enforce that. Later, we might want to add a new status, like `re-submitted`​. Imagine having to go through our entire codebase using text search to track down everywhere that type can surface? That sounds awful to me. Instead, we should just be able to add that new `re-submitted`​ status and have the compiler show us everything we need update.
+A way to think about this is that we are using the type system to model business logic. For example, an `Application`​ can be `pending`​, `submitted`​, or `rejected`​. It can `never`​ be anything else, and we want the compiler to enforce that. Later, we might want to add a new status, like `re-submitted`​. Imagine having to go through an entire prod codebase using text search to track down everywhere that type can surface? That sounds awful to me. Wait, I've done it before. it **is** awful. Instead, we should just be able to add that new `re-submitted`​ status and have the compiler show us everything we need update.
 
 ## That's it!
 
