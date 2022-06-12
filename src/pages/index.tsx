@@ -35,8 +35,7 @@ const IndexPage: React.FC<IndexPageProps> = props => {
       <section id="intro" style={{ margin: "20vh 0", height: "70vh" }}>
         <h1>hello</h1>
         <p>
-          My name is Mark. I'm a web developer and drummer. I live on Lenape
-          Land (known as Brooklyn, NY). I write about web development from time
+          My name is Mark. I'm a software engineer and drummer. I live in NYC. I write about coding from time
           to time. Thanks for checking out my blog. Scroll down to see some
           posts.
         </p>
