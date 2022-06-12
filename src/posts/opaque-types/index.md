@@ -45,7 +45,7 @@ const UserClient = {
 
 In the first method, we are accepting something called `id`​, which is a string. In the second, we are accepting two string args: ​`key`​, and `id`​. If we look at the usage of these args, we can _**sort-of guess**_ that the `id`​ of the first function is the same thing as the `key`​ of the second function. We can't know that for sure though unless we open up the REST API code and hunt down that endpoint to see what it does with that param.
 
-We also then have to deal with this `id`​ param in the second function. Again, we can guess that it has something to do with the `post`​ being fetched, but we don't know for sure what `string`​ we should use (is there an `post.id`​? `post.uuid`​? `post.key`​? ​`post.someOtherThingJustHereToTrickYou`​?). Again, we have to open up the REST API code to see what is going on.
+We also then have to deal with this `id`​ param in the second function. Again, we can guess that it has something to do with the `post`​ being fetched, but we don't know for sure what `string`​ we should use (is there a `post.id`​? `post.uuid`​? `post.key`​? ​`post.someOtherThingJustHereToTrickYou`​?). Again, we have to open up the REST API code to see what is going on.
 
 Let's see how this could be much nicer with opaque types!
 
@@ -93,9 +93,9 @@ Now, we have a much better idea what is happening from looking at this code. We 
 
 > **Note:** It is important to use the `Opaque`​ generic type to create opaque types. You may be tempted to try something like this:
 > ```typescript
-> type ArticleKey = string
+> type PostId = string
 > ```
-> Unfortunately, this just creates a _**type alias**_, which means that the compiler treats all `ArticleKey`​ types as transparent `string`​ types.
+> Unfortunately, this just creates a _**type alias**_, which means that the compiler treats all `PostId`​ types as transparent `string`​ types.
 
 ### Compiler goodness
 
@@ -173,7 +173,7 @@ const UserClient = {
 Sometimes you need to get an opaque type via validation. This is where type guards come in handy. Let's say you have parts of the application code that expect data to already be validated when it is used. A great example of this is a signup function that sends a user email to the API to create an account. We can use an opaque `Email`​ type with a **typeguard** to ensure we **always** validate the email before using.
 
 ```typescript
-// a very paired-down, contrived example
+// a very pared-down, contrived example
 declare const EmailS: unique symbol
 type Email = Opaque<string, EmailS>
 

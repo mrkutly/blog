@@ -345,7 +345,7 @@ h1 {
   font-family: Lora, serif;
   margin-left: 0;
   margin-right: 0;
-  margin-top: 0;
+  margin-top: 1.45rem;
   padding-bottom: 0;
   padding-left: 0;
   padding-right: 0;
@@ -361,7 +361,7 @@ h2 {
   font-weight: bold;
   margin-left: 0;
   margin-right: 0;
-  margin-top: 0;
+  margin-top: 1.45rem;
   padding-bottom: 0;
   padding-left: 0;
   padding-right: 0;
@@ -377,7 +377,7 @@ h3 {
   font-weight: bold;
   margin-left: 0;
   margin-right: 0;
-  margin-top: 0;
+  margin-top: 1.45rem;
   padding-bottom: 0;
   padding-left: 0;
   padding-right: 0;
@@ -392,7 +392,7 @@ h3 {
 h4 {
   margin-left: 0;
   margin-right: 0;
-  margin-top: 0;
+  margin-top: 1.45rem;
   padding-bottom: 0;
   padding-left: 0;
   padding-right: 0;
@@ -408,7 +408,7 @@ h4 {
 h5 {
   margin-left: 0;
   margin-right: 0;
-  margin-top: 0;
+  margin-top: 1.45rem;
   padding-bottom: 0;
   padding-left: 0;
   padding-right: 0;
@@ -428,7 +428,7 @@ h6 {
   padding-bottom: 0;
   padding-left: 0;
   padding-right: 0;
-  padding-top: 0;
+  margin-top: 1.45rem;
   margin-bottom: 1.45rem;
   color: inherit;
   font-weight: bold;
@@ -755,21 +755,8 @@ code {
 pre code {
   background: none;
   line-height: 1.42;
-}
-
-code:before,
-code:after,
-tt:before,
-tt:after {
-  letter-spacing: -0.2em;
-  content: " ";
-}
-
-pre code:before,
-pre code:after,
-pre tt:before,
-pre tt:after {
-  content: "";
+  margin-top: 1.45rem;
+  margin-bottom: 1.45rem;
 }
 
 @media only screen and (max-width: 480px) {
